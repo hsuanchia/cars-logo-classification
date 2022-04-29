@@ -13,7 +13,7 @@ def preprocessing_img(path):
     x /= 255.0 # regularization
     return x
 
-model_path = './Models/vgg66_1.h5'
+model_path = './Models/vgg16_1.h5'
 test_dir = './Cars logo/test/' 
 
 model = load_model(model_path)
@@ -55,6 +55,37 @@ def predict(path,real_ans):
     cv2.waitKey(0)
     '''
 
+def predict_single(path,real_ans):
+    data = []
+    tmp = preprocessing_img(path)
+    data.append(tmp)
+    data = np.array(data)
+    pre = model.predict(data)
+
+    # print(pre[0])
+    print('Real answer: ',real_ans)
+    ans = -1
+    ans_name = 'unknown'
+    # Anomaly detection
+    for i in pre[0]:
+        if i > 0.8:
+            ans = 0
+            break
+    if ans != -1:
+        ans = np.argmax(pre[0])
+        ans_name = num_to_class[(str)(ans)]
+    print('Predict answer: ',ans_name)
+    img = cv2.imread(path)
+    cv2.namedWindow(path,0)
+    cv2.resizeWindow(path,500,500)
+    cv2.imshow(path,img)
+    cv2.waitKey(0)
+    if ans_name == real_ans:
+        return 1
+    else:
+        return 0
+   
+
 # Predict test data and evaluate test accuracy
 test_data = pd.read_csv('./Cars logo/test_info.csv')
 correct = 0
@@ -65,5 +96,5 @@ print("Test accuracy: ", (float)(correct) / (float)(len(test_data)))
 
 
 # Predict Single image
-# predict(path,real_answer)
+# predict_single('./Cars logo/test/unknown_001.jpg','unknown')
     
