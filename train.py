@@ -109,22 +109,26 @@ vgg16 = VGG16(input_shape=(input_size,input_size,3),weights='imagenet',include_t
 densenet = DenseNet121(input_shape=(input_size,input_size,3),weights='imagenet',include_top=False)
 resnet = ResNet50V2(input_shape=(input_size,input_size,3),weights='imagenet',include_top=False)
 
-for l in densenet.layers:
-    l.trainable = False
+def train_model(transfer):
+    for l in transfer.layers:
+        l.trainable = False
 
-x = Flatten(name='flatten')(resnet.output)
-pred = Dense(classes,activation='softmax',name='output')(x)
+    x = Flatten(name='flatten')(transfer.output)
+    pred = Dense(classes,activation='softmax',name='output')(x)
 
-transfer_model = Model(inputs=resnet.input,outputs=pred)
+    transfer_model = Model(inputs=transfer.input,outputs=pred)
 
-transfer_model.summary()
+    transfer_model.summary()
 
-transfer_model.compile(loss='categorical_crossentropy',optimizer='adam' ,metrics=['accuracy'])
+    transfer_model.compile(loss='categorical_crossentropy',optimizer='adam' ,metrics=['accuracy'])
 
-history = transfer_model.fit(train_x,train_y,epochs=epochs,batch_size=16,validation_split=0.2,verbose=1)
+    history = transfer_model.fit(train_x,train_y,epochs=epochs,batch_size=16,validation_split=0.2,verbose=1)
 
-transfer_model.save('./Models/resnet_3.h5')
+    transfer_model.save('./Models/vgg16_1.h5')
 
+    return history
+
+history = train_model(vgg16)
 
 def show_train_history(model, train_acc,val_acc):
     plt.plot(model.history[train_acc])
