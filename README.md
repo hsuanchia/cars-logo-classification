@@ -38,3 +38,7 @@ NCNU 1102 machine learning midterm project
     * Set Test_dir into path of test dataset
     * If want to predict single instance, just call predict_single
 ## Examples
+<img width="877" alt="github ex1" src="https://user-images.githubusercontent.com/59002617/166056603-8342a519-cb27-4ad6-ac14-ee07cd14033d.png">
+
+<img width="880" alt="github ex2" src="https://user-images.githubusercontent.com/59002617/166056713-524681f7-7d89-480c-abd5-4785826034d1.png">
+
