@@ -37,6 +37,7 @@ NCNU 1102 machine learning midterm project
     * Set model_path into path of model you want to run
     * Set Test_dir into path of test dataset
     * If want to predict single instance, just call predict_single
+* [Models I trained](https://drive.google.com/drive/folders/1O5VvhMDYRv5wSza50__I5JxVQngNxQab?usp=sharing)
 ## Examples
 <img width="877" alt="github ex1" src="https://user-images.githubusercontent.com/59002617/166056603-8342a519-cb27-4ad6-ac14-ee07cd14033d.png">
 
