@@ -27,7 +27,7 @@ NCNU 1102 machine learning midterm project
 ### Training model
 * Execute train.py
     * Call train_model function
-    * Choose Choose transfer learning model you want and put it as parameter of train_model
+    * Choose transfer learning model you want and put it as parameter of train_model
     * Transfer model I used
         * VGG16
         * ResNet50V2
